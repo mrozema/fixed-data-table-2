@@ -35,6 +35,7 @@ var FixedDataTableBufferedRows = React.createClass({
     onRowMouseDown: PropTypes.func,
     onRowMouseEnter: PropTypes.func,
     onRowMouseLeave: PropTypes.func,
+    onRowArrowPress: PropTypes.func,
     rowClassNameGetter: PropTypes.func,
     rowsCount: PropTypes.number.isRequired,
     rowHeightGetter: PropTypes.func,

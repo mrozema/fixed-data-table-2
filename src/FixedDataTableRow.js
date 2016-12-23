@@ -69,6 +69,11 @@ var FixedDataTableRowImpl = React.createClass({
     onClick: PropTypes.func,
 
     /**
+     * Fire when arrow key is presses
+     */
+    onArrow: PropTypes.func,
+
+    /**
      * Fire when a row is double clicked.
      */
     onDoubleClick: PropTypes.func,
@@ -173,6 +178,8 @@ var FixedDataTableRowImpl = React.createClass({
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
         onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
+        onKeyUp={this.props.onArrow ? this._onKeyUp : null}
+        onKeyDown={this.props.onArrow ? this._onKeyDown : null}
         style={style}>
         <div className={cx('fixedDataTableRowLayout/body')}>
           {fixedColumns}
@@ -219,6 +226,14 @@ var FixedDataTableRowImpl = React.createClass({
       };
       return <div className={className} style={style} />;
     }
+  },
+
+  _onKeyUp(/*object*/ event) {
+    this.props.onArrow(event, this.props.index - 1);
+  },
+
+  _onKeyDown(/*object*/ event) {
+    this.props.onArrow(event, this.props.index + 1);
   },
 
   _onClick(/*object*/ event) {
