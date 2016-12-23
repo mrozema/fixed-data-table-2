@@ -532,6 +532,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    onRowMouseLeave: PropTypes.func,
 
+	    onRowArrowPress: PropTypes.func,
+
 	    /**
 	     * Callback that is called when resizer has been released
 	     * and column needs to be updated.
@@ -850,6 +852,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      onRowMouseDown: state.onRowMouseDown,
 	      onRowMouseEnter: state.onRowMouseEnter,
 	      onRowMouseLeave: state.onRowMouseLeave,
+	      onRowArrowPress: state.onRowArrowPress,
 	      rowClassNameGetter: state.rowClassNameGetter,
 	      rowsCount: state.rowsCount,
 	      rowGetter: state.rowGetter,
@@ -3896,6 +3899,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onRowMouseDown: PropTypes.func,
 	    onRowMouseEnter: PropTypes.func,
 	    onRowMouseLeave: PropTypes.func,
+	    onRowArrowPress: PropTypes.func,
 	    rowClassNameGetter: PropTypes.func,
 	    rowsCount: PropTypes.number.isRequired,
 	    rowHeightGetter: PropTypes.func,
@@ -3990,6 +3994,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onMouseDown: props.onRowMouseDown,
 	        onMouseEnter: props.onRowMouseEnter,
 	        onMouseLeave: props.onRowMouseLeave,
+	        onArrow: props.onRowArrowPress,
 	        className: (0, _joinClasses2.default)(rowClassNameGetter(rowIndex), (0, _cx2.default)('public/fixedDataTable/bodyRow'), (0, _cx2.default)({
 	          'fixedDataTableLayout/hasBottomBorder': hasBottomBorder,
 	          'public/fixedDataTable/hasBottomBorder': hasBottomBorder
@@ -4661,6 +4666,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onClick: PropTypes.func,
 
 	    /**
+	     * Fire when arrow key is presses
+	     */
+	    onArrow: PropTypes.func,
+
+	    /**
 	     * Fire when a row is double clicked.
 	     */
 	    onDoubleClick: PropTypes.func,
@@ -4764,6 +4774,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onMouseDown: this.props.onMouseDown ? this._onMouseDown : null,
 	        onMouseEnter: this.props.onMouseEnter ? this._onMouseEnter : null,
 	        onMouseLeave: this.props.onMouseLeave ? this._onMouseLeave : null,
+	        onKeyUp: this._onKeyUp,
+	        onKeyDown: this.props.onArrow ? this._onKeyDown : null,
 	        style: style },
 	      _React2.default.createElement(
 	        'div',
@@ -4804,7 +4816,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _React2.default.createElement('div', { className: className, style: style });
 	    }
 	  },
+	  _onKeyUp: function _onKeyUp( /*object*/event) {
+	    console.log('key up!');
+	    this.props.onArrow(event, this.props.index - 1);
+	  },
+	  _onKeyDown: function _onKeyDown( /*object*/event) {
+	    console.log('key up!');
+	    this.props.onArrow(event, this.props.index + 1);
+	  },
 	  _onClick: function _onClick( /*object*/event) {
+	    console.log('click!');
 	    this.props.onClick(event, this.props.index);
 	  },
 	  _onDoubleClick: function _onDoubleClick( /*object*/event) {
